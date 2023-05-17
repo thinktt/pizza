@@ -2,6 +2,9 @@ export default {
   doAuth,
   setToken,
   isAuthed,
+  createOrder,
+  getOrders,
+  cancelOrder,
 }
 
 
@@ -37,40 +40,73 @@ async function doAuth({ username, password }) {
   setToken(json.access_token)
 } 
 
+async function createOrder({pizza, crust, size, table}) {
 
-// async function addGame(game) {
-//   if (yowApiIsDown) {
-//     return apiIsDownRes
-//   }
-//   const res = await fetch(`${yowApiUrl}/games/`, {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json, text/plain, */*',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(game)
-//   }).catch((err) =>  {
-//     yowApiIsDown = true
-//     return {ok: false, status: 502, message: 'connection refused' }
-//   })
+  const res = await fetch(`${url}/orders`, {
+    method: 'POST',
+    headers: {
+      'Authorization' : 'Bearer ' + token,
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+      Flavor: pizza, 
+      Crust: crust, 
+      Size: size, 
+      Table_No: parseInt(table),
+      Timestamp: new Date().toISOString(),
+      Order_ID: Date.now(),
+    })
+  })
 
-//   return res
-// } 
+  const json = await res.json()
+
+  if (!res.ok) {
+    throw new Error(`${res.status}: ${json.detail || json.msg}`)
+  }
+  
+} 
+
+async function getOrders() {
+  const res = await fetch(`${url}/orders`, {
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+    },
+  })
+
+  const json = await res.json()
+
+  if (!res.ok) {
+    throw new Error(`${res.status}: ${json.msg}`)
+  }
+
+  const orders = json.map((order) => {
+    return {
+      pizza: order.Flavor,
+      crust: order.Crust,
+      size: order.Size,
+      table: order.Table_No,
+      id: order.Order_ID,
+      timestamp: order.Timestamp,
+    }
+  })
+
+  return orders
+}
+
+async function cancelOrder(id) {
+  const res = await fetch(`${url}/orders/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization' : 'Bearer ' + token,
+      'Accept': 'application/json, text/plain, */*',
+    },
+  })
+
+  const json = await res.json()
+  if (!res.ok) {
+    throw new Error(`${res.status}: ${json.msg || json.detail}`)
+  }
+}
 
 
-// async function getGame(id) {
-//   if (yowApiIsDown) {
-//     return apiIsDownRes
-//   }
-//   const res = await fetch(`${yowApiUrl}/games/${id}`, {
-//     headers: {
-//       'Accept': 'application/json, text/plain, */*',
-//       'Content-Type': 'application/json'
-//     },
-//   }).catch((err) => {
-//     yowApiIsDown = true
-//     return {ok: false, status: 502, message: 'connection refused' }
-//   })
-
-//   return res
-// }

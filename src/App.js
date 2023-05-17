@@ -1,13 +1,8 @@
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom"
 
-//Import the pages
-
-import Page1 from "./Components/page1.js"
-import Page2 from "./Components/page2"
-import Page3 from "./Components/page3"
 import Build from "./Build"
 import SignIn from "./SignIn.js"
-
+import Orders from "./Orders.js"
 
 function App() {
   return (
@@ -15,20 +10,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<SignIn />} />
-          <Route exact path="page1" element={<Page1 />} />
-          <Route exact path="page2" element={<Page2 />} />
-          <Route exact path="page3" element={<Page3 />} />
+          <Route exact path="orders" element={<Orders/>} />
           <Route exact path="build" element={<Build />} />
         </Routes>
-        {/* <div className="list">
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="page1">Page 1</Link></li>
-            <li><Link to="page2">Page 2</Link></li>
-            <li><Link to="page3">Page 3</Link></li> 
-            <li><Link to="build">Build</Link></li>
-          </ul>
-        </div> */}
       </Router>
     </div>
   );

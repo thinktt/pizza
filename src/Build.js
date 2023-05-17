@@ -20,6 +20,49 @@ export default function Build() {
   const [crustSelection, setCrust] = useState()
   const [sizeSelection, setSize] = useState()
   const [tableSelection, setTable] = useState()
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState()
+  const [orderWasSent, setOrderWasSent] = useState(false)
+
+  const clearSelections = () => {
+    setPizza(null)
+    setCrust(null)
+    setSize(null)
+    setTable(null)
+  }
+
+  const isMissingSelection = () => {
+    return !pizzaSelection || !crustSelection || !sizeSelection || !tableSelection
+  }
+
+  const sendOrder = async () => {
+    setOrderWasSent(false)
+    setError(null)
+    
+    if (isMissingSelection()) {
+      setError('All fields must be selected')
+      return
+    }
+
+    setIsSending(true)
+    
+    let err
+    await api.createOrder({
+      pizza: pizzaSelection,
+      crust: crustSelection,
+      size: sizeSelection,
+      table: tableSelection
+    }).catch((e) => err = e)
+    if (err) {
+      setError(err.message)
+      setIsSending(false)
+      return
+    }
+    
+    clearSelections()
+    setOrderWasSent(true)
+    setIsSending(false)
+  }
 
   return (
     <main className="main">
@@ -50,7 +93,12 @@ export default function Build() {
         optionSelection={tableSelection}
         doSelection={setTable}
       ></Option>
-      <button>Send Order</button>
+      { isSending ? <h1>spinner...</h1> :
+         <button onClick={sendOrder}>Send Order</button>
+      }
+      <button onClick={() => navigate('/orders')}>View Orders</button>
+      { error && <h4 style={{color: 'red'}} >{error}</h4> }
+      { orderWasSent && <h4 style={{color: 'green'}} >Order Sent!</h4> }
     </main>
   )
 }

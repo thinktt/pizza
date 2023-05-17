@@ -20,7 +20,7 @@ export default function SignIn() {
     }
     
     setIsSending(false)
-    navigate('/build')
+    navigate('/orders')
     // setError({message: 'good job'})
   }
 
