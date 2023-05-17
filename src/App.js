@@ -1,67 +1,36 @@
-import './App.css'
-import { useState } from 'react'
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+
+//Import the pages
+
+import Page1 from "./Components/page1.js"
+import Page2 from "./Components/page2"
+import Page3 from "./Components/page3"
+import Build from "./Build"
+
 
 function App() {
-  const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
-  const crusts = ['Thin Crust', 'Deep Dish']
-  const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
-  const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
-  
-  const [pizzaSelection, setPizza] = useState()
-  const [crustSelection, setCrust] = useState()
-  const [sizeSelection, setSize] = useState()
-  const [tableSelection, setTable] = useState()
-
   return (
-    <main className="main">
-      <h1 className="title">
-          Turtle Pizza
-      </h1>
-      <h4>appears at your table with ninja stealth</h4>
-      <img 
-        className="turtles" 
-        src="/tmnt.png" alt="A group of teenage turtles approving of pizza" />
-      <Option 
-        options={pizzas}
-        optionSelection={pizzaSelection}
-        doSelection={setPizza} 
-      ></Option>
-      <Option 
-        options={crusts}
-        optionSelection={crustSelection}
-        doSelection={setCrust}
-      ></Option>
-      <Option 
-        options={sizes}
-        optionSelection={sizeSelection}
-        doSelection={setSize}
-      ></Option>
-      <Option
-        options={tables}
-        optionSelection={tableSelection}
-        doSelection={setTable}
-      ></Option>
-    </main>
-  )
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<h1>Home Page</h1>} />
+          <Route exact path="page1" element={<Page1 />} />
+          <Route exact path="page2" element={<Page2 />} />
+          <Route exact path="page3" element={<Page3 />} />
+          <Route exact path="build" element={<Build />} />
+        </Routes>
+        <div className="list">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="page1">Page 1</Link></li>
+            <li><Link to="page2">Page 2</Link></li>
+            <li><Link to="page3">Page 3</Link></li> 
+            <li><Link to="build">Build</Link></li>
+          </ul>
+        </div>
+      </Router>
+    </div>
+  );
 }
 
-function Option( { options, optionSelection, doSelection }) { 
-  return (
-    <div className="pizzas option-group">
-    { options.map(option => 
-      <h2 
-        key={option} 
-        className={optionSelection === option && 'selected'}
-        onClick={() => doSelection(option)}
-      >
-        {option}
-      </h2> ) 
-    }
-    </div>
-  )
-}  
-
-
-export default App
-
-
+export default App;
