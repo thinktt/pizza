@@ -1,11 +1,13 @@
-import logo from './logo.svg'
 import './App.css'
+import { useState } from 'react'
 
 function App() {
   const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
   const crust = ['Thin Crust', 'Deep Dish']
   const size = ['Small', 'Medium', 'Large', 'Extra Large']
   const table = ['1', '2', '3', '4', '5', '6', '7', '8']
+  const [pizzaSelection, setPizza] = useState('Peperoni')
+  
   return (
     <main className="main">
       <h1 className="title">
@@ -15,13 +17,12 @@ function App() {
       <img 
         className="turtles" 
         src="/tmnt.png" alt="A group of teenage turtles approving of pizza" />
-      <div className="pizzas option-group">
-        { pizzas.map(pizza => 
-          <h2 key={pizza} className="selected">
-            {pizza}
-          </h2> ) 
-        }
-      </div>
+      <Option 
+        options={pizzas}
+        optionSelection={pizzaSelection}
+        doSelection={setPizza} 
+      >
+      </Option>
       <div className="crust option-group">
         { crust.map(crust => <h2 key={crust}> {crust} </h2> ) }
       </div>
@@ -34,6 +35,23 @@ function App() {
     </main>
   )
 }
+
+function Option( { options, optionSelection, doSelection }) { 
+  return (
+    <div className="pizzas option-group">
+    { options.map(option => 
+      <h2 
+        key={option} 
+        className={optionSelection === option && 'selected'}
+        onClick={() => doSelection(option)}
+      >
+        {option}
+      </h2> ) 
+    }
+    </div>
+  )
+}  
+
 
 export default App
 
