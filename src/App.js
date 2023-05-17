@@ -20,7 +20,7 @@ function App() {
           <Route exact path="page3" element={<Page3 />} />
           <Route exact path="build" element={<Build />} />
         </Routes>
-        <div className="list">
+        {/* <div className="list">
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="page1">Page 1</Link></li>
@@ -28,7 +28,7 @@ function App() {
             <li><Link to="page3">Page 3</Link></li> 
             <li><Link to="build">Build</Link></li>
           </ul>
-        </div>
+        </div> */}
       </Router>
     </div>
   );

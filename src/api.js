@@ -1,12 +1,17 @@
 export default { 
   doAuth,
   setToken,
+  isAuthed,
 }
 
 
 let token = null
 const url = 'https://pizza-api-app.herokuapp.com/api'
 
+
+function isAuthed() {
+  return token !== null
+}
 
 function setToken(tokenToSet) {
   token = tokenToSet
@@ -29,9 +34,7 @@ async function doAuth({ username, password }) {
     throw new Error(`${res.status}: ${json.msg}`)
   }
 
-  setToken(json.acccess_token)
-
-  return
+  setToken(json.access_token)
 } 
 
 

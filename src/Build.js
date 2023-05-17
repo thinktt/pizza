@@ -1,6 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import api from './api.js'
+import { useNavigate } from "react-router-dom"
 
 export default function Build() {
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if (!api.isAuthed()) {
+      navigate('/')
+    }
+  }, [navigate])
+
   const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
   const crusts = ['Thin Crust', 'Deep Dish']
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
@@ -51,7 +61,7 @@ function Option( { options, optionSelection, doSelection }) {
     { options.map(option => 
       <h2 
         key={option} 
-        className={optionSelection === option && 'selected'}
+        className={optionSelection === option ? 'selected' : ''}
         onClick={() => doSelection(option)}
       >
         {option}

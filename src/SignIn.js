@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import api from './api.js'
 
 export default function SignIn() {
   const [error, setError] = useState()
   const [isSending, setIsSending] = useState(false)
+  const navigate = useNavigate()
   
   const sendAuth = async (username, password) => {
     setError(null)
@@ -18,7 +20,8 @@ export default function SignIn() {
     }
     
     setIsSending(false)
-    setError({message: 'good job'})
+    navigate('/build')
+    // setError({message: 'good job'})
   }
 
   return (
