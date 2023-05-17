@@ -6,6 +6,7 @@ import Page1 from "./Components/page1.js"
 import Page2 from "./Components/page2"
 import Page3 from "./Components/page3"
 import Build from "./Build"
+import SignIn from "./SignIn.js"
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<h1>Home Page</h1>} />
+          <Route exact path="/" element={<SignIn />} />
           <Route exact path="page1" element={<Page1 />} />
           <Route exact path="page2" element={<Page2 />} />
           <Route exact path="page3" element={<Page3 />} />

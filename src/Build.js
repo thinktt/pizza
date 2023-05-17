@@ -1,4 +1,3 @@
-import './App.css'
 import { useState } from 'react'
 
 export default function Build() {
@@ -41,6 +40,7 @@ export default function Build() {
         optionSelection={tableSelection}
         doSelection={setTable}
       ></Option>
+      <button>Send Order</button>
     </main>
   )
 }
