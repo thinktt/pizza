@@ -3,11 +3,15 @@ import { useState } from 'react'
 
 function App() {
   const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
-  const crust = ['Thin Crust', 'Deep Dish']
-  const size = ['Small', 'Medium', 'Large', 'Extra Large']
-  const table = ['1', '2', '3', '4', '5', '6', '7', '8']
-  const [pizzaSelection, setPizza] = useState('Peperoni')
+  const crusts = ['Thin Crust', 'Deep Dish']
+  const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
+  const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
   
+  const [pizzaSelection, setPizza] = useState()
+  const [crustSelection, setCrust] = useState()
+  const [sizeSelection, setSize] = useState()
+  const [tableSelection, setTable] = useState()
+
   return (
     <main className="main">
       <h1 className="title">
@@ -21,17 +25,22 @@ function App() {
         options={pizzas}
         optionSelection={pizzaSelection}
         doSelection={setPizza} 
-      >
-      </Option>
-      <div className="crust option-group">
-        { crust.map(crust => <h2 key={crust}> {crust} </h2> ) }
-      </div>
-      <div key={size} className="size option-group">
-        { size.map(size => <h2 key={size}> {size} </h2> ) }
-      </div>
-      <div className="table option-group">
-        { table.map(table => <h2 key={table} >{table} </h2> ) }
-      </div>
+      ></Option>
+      <Option 
+        options={crusts}
+        optionSelection={crustSelection}
+        doSelection={setCrust}
+      ></Option>
+      <Option 
+        options={sizes}
+        optionSelection={sizeSelection}
+        doSelection={setSize}
+      ></Option>
+      <Option
+        options={tables}
+        optionSelection={tableSelection}
+        doSelection={setTable}
+      ></Option>
     </main>
   )
 }
