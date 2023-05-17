@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from './api.js'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 export default function Orders() {
   const navigate = useNavigate()
@@ -27,7 +27,6 @@ export default function Orders() {
 
   const cancelOrder = async (order) => {
     setError(null)
-    console.log('cancel order', order)
     let err
     await api.cancelOrder(order.id).catch((e) => err = e)
     if (err) {
@@ -79,54 +78,75 @@ function Filters() {
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
   const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
 
-  const [pizzaSelections, setPizza] = useState([])
-  const [crustSelections, setCrust] = useState([])
-  const [sizeSelections, setSize] = useState([])
-  const [tableSelections, setTable] = useState([])
+  const [pizzaFilters, setPizzaFilters] = useState([])
+  const [crustFilters, setCrustFilters] = useState([])
+  const [sizeFilters, setSizeFilters] = useState([])
+  const [tableFilters, setTableFilters] = useState([])
+
+
+  const updaterObj = {
+    pizza: setPizzaFilters,
+    crust: setCrustFilters,
+    size: setSizeFilters,
+    table: setTableFilters
+  }
+
+  const updateFilter = (filter) => (selections) => {
+    updaterObj[filter](selections)
+  }
 
   return (
     <div className="filters">
       <h2>Filters</h2>
-        <Option 
+        <Filter
           options={pizzas}
-          optionSelection={pizzaSelections}
-          doSelection={setPizza} 
-        ></Option>
-        <Option 
+          selections={pizzaFilters}
+          updateFilter={updateFilter('pizza')} 
+        ></Filter>
+        <Filter 
           options={crusts}
-          optionSelection={crustSelections}
-          doSelection={setCrust}
-        ></Option>
-        <Option 
+          selections={crustFilters}
+          updateFilter={updateFilter('crust')}
+        ></Filter>
+        <Filter 
           options={sizes}
-          optionSelection={sizeSelections}
-          doSelection={setSize}
-        ></Option>
-        <Option
+          selections={sizeFilters}
+          updateFilter={updateFilter('size')}
+        ></Filter>
+        <Filter
           options={tables}
-          optionSelection={tableSelections}
-          doSelection={setTable}
-        ></Option>
+          selections={tableFilters}
+          updateFilter={updateFilter('table')}
+        ></Filter>
     </div>
   )
 }
 
-function Option( { options, optionSelection, doSelection }) { 
+function Filter( { options, selections, updateFilter }) {
+
+  const toggle = (option) => {
+    const index = selections.indexOf(option)
+    if (index > -1) {
+      selections.splice(index, 1)
+    } else {
+      selections.push(option)
+    }
+    updateFilter(selections.slice())
+  }
+
+
   return (
     <div className="pizzas option-group">
     { options.map(option => 
       <h4 
         key={option} 
-        className={optionSelection === option ? 'selected' : ''}
-        onClick={() => doSelection(option)}
+        className={selections.includes(option) ? 'selected' : ''}
+        onClick={() => toggle(option)}
       >
         {option}
       </h4> ) 
     }
     </div>
   )
-}  
-
-
-
+}
 
