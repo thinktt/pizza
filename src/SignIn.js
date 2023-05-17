@@ -8,7 +8,6 @@ export default function SignIn() {
   const sendAuth = async (username, password) => {
     setError(null)
     setIsSending(true)
-    // await new Promise(r => setTimeout(r, 2000))
     
     let err
     await api.doAuth({ username, password }).catch((e) => err = e)
@@ -35,7 +34,7 @@ export default function SignIn() {
       { isSending ? <h1>spinner...</h1> : 
         <SignInForm sendAuth={sendAuth}></SignInForm> 
       } 
-      { error && <h1>{error.message}</h1> }     
+      { error && <h4 style={{color: 'red'}} >{error.message}</h4> }     
     </main>
   )
 }

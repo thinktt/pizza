@@ -23,11 +23,12 @@ async function doAuth({ username, password }) {
     body: JSON.stringify({ username, password })
   })
   
+  const json = await res.json()
+  
   if (!res.ok) {
-    throw new Error(res.status, res.statusText)
+    throw new Error(`${res.status}: ${json.msg}`)
   }
 
-  const json = await res.json()
   setToken(json.acccess_token)
 
   return
