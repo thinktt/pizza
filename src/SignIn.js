@@ -2,8 +2,6 @@ import { useState } from 'react'
 import api from './api.js'
 
 export default function SignIn() {
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
   const [error, setError] = useState()
   const [isSending, setIsSending] = useState(false)
   
@@ -21,7 +19,7 @@ export default function SignIn() {
     }
     
     setIsSending(false)
-    setError({message: 'bad username or password'})
+    setError({message: 'good job'})
   }
 
   return (
@@ -35,12 +33,7 @@ export default function SignIn() {
         src="/tmnt.png" alt="A group of teenage turtles approving of pizza" 
       />
       { isSending ? <h1>spinner...</h1> : 
-        <SignInForm 
-          username={username} 
-          password={password} 
-          sendAuth={sendAuth}
-        >
-        </SignInForm> 
+        <SignInForm sendAuth={sendAuth}></SignInForm> 
       } 
       { error && <h1>{error.message}</h1> }     
     </main>
@@ -48,11 +41,22 @@ export default function SignIn() {
 }
 
 
-function SignInForm({ username, password, sendAuth}) {
+function SignInForm({ sendAuth}) {
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+
   return (
     <div>
-      <input type="text" placeholder="Username" value={username}></input>
-      <input type="password" placeholder="Password" value={password}></input>
+      <input 
+        type="text" 
+        placeholder="Username" 
+        onChange={e => setUsername(e.target.value)}
+      ></input>
+      <input 
+        type="password" 
+        placeholder="Password" 
+        onChange={e => setPassword(e.target.value)}
+      ></input>
       <button onClick={() => sendAuth(username, password)}>Sign In</button>
     </div>
   )
