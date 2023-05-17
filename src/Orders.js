@@ -47,6 +47,7 @@ export default function Orders() {
   
   return (
     <main className="main">
+      <Filters />
       <h1 className="title">
           Orders
       </h1>
@@ -71,17 +72,56 @@ function Order(order) {
   )
 }
 
+
+function Filters() {
+  const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
+  const crusts = ['Thin Crust', 'Deep Dish']
+  const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
+  const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
+
+  const [pizzaSelections, setPizza] = useState([])
+  const [crustSelections, setCrust] = useState([])
+  const [sizeSelections, setSize] = useState([])
+  const [tableSelections, setTable] = useState([])
+
+  return (
+    <div className="filters">
+      <h2>Filters</h2>
+        <Option 
+          options={pizzas}
+          optionSelection={pizzaSelections}
+          doSelection={setPizza} 
+        ></Option>
+        <Option 
+          options={crusts}
+          optionSelection={crustSelections}
+          doSelection={setCrust}
+        ></Option>
+        <Option 
+          options={sizes}
+          optionSelection={sizeSelections}
+          doSelection={setSize}
+        ></Option>
+        <Option
+          options={tables}
+          optionSelection={tableSelections}
+          doSelection={setTable}
+        ></Option>
+    </div>
+  )
+}
+
 function Option( { options, optionSelection, doSelection }) { 
   return (
     <div className="pizzas option-group">
     { options.map(option => 
-      <h2 
+      <h4 
         key={option} 
         className={optionSelection === option ? 'selected' : ''}
         onClick={() => doSelection(option)}
       >
         {option}
-      </h2> ) 
+      </h4> ) 
     }
     </div>
   )
