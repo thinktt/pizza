@@ -118,28 +118,31 @@ function Order(order) {
 }
 
 function Filters(props) {
-  const {
-    pizzaFilters, setPizzaFilters,
-    crustFilters, setCrustFilters,
-    sizeFilters, setSizeFilters,
-    tableFilters, setTableFilters
-  } = props
-
-
   const pizzas = ['Pepperoni', 'Mushroom', 'Pineapple', 'Cheese']
   const crusts = ['Thin Crust', 'Deep Dish']
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
   const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
 
-  const updaterObj = {
-    pizza: setPizzaFilters,
-    crust: setCrustFilters,
-    size: setSizeFilters,
-    table: setTableFilters
-  }
+  const { 
+    pizzaFilters, setPizzaFilters, crustFilters, setCrustFilters, 
+    sizeFilters, setSizeFilters, tableFilters, setTableFilters 
+  } = props
 
   const updateFilter = (filter) => (selections) => {
-    updaterObj[filter](selections)
+    const updateMap = {
+      pizza: setPizzaFilters,
+      crust: setCrustFilters,
+      size: setSizeFilters,
+      table: setTableFilters
+    }
+    updateMap[filter](selections)
+  }
+
+  const clearFilters = () => {
+    setPizzaFilters([])
+    setCrustFilters([])
+    setSizeFilters([])
+    setTableFilters([])
   }
 
   return (
@@ -165,6 +168,7 @@ function Filters(props) {
           selections={tableFilters}
           updateFilter={updateFilter('table')}
         ></Filter>
+        <button onClick={clearFilters}>Clear Filters</button>
     </div>
   )
 }
