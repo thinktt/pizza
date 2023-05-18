@@ -11,7 +11,7 @@ export default function Build() {
     }
   }, [navigate])
 
-  const pizzas = ['Pepperoni', 'Mushroom', 'Pineaapple', 'Cheese']
+  const pizzas = ['Pepperoni', 'Mushroom', 'Pineapple', 'Cheese']
   const crusts = ['Thin Crust', 'Deep Dish']
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
   const tables = ['1', '2', '3', '4', '5', '6', '7', '8']

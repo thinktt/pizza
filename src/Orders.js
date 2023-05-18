@@ -70,10 +70,15 @@ function Orders({ filters }) {
   
   return (
       <div className='orders'>
-        <h1 className="title">
-            Orders
-        </h1>
-        <button onClick={() => navigate('/build')}>New Order</button>
+        <heading>
+          <h1 className="title">
+              Orders
+          </h1>
+          <button onClick={() => navigate('/build')}>New Order</button>
+          <img className="turtles small" 
+            src="/tmnt.png" alt="A group of teenage turtles approving of pizza" 
+          />
+        </heading>
         { successMessage && <h3 style={{color: 'green'}} >{successMessage}</h3> }
         { error && <h3 style={{color: 'red'}} >{error}</h3> }
         { !orders.length ? <h2>No Current Orders</h2> : 
