@@ -21,7 +21,6 @@ export default function SignIn() {
     
     setIsSending(false)
     navigate('/orders')
-    // setError({message: 'good job'})
   }
 
   return (
