@@ -15,6 +15,7 @@
   margin-bottom: 5%;
   padding-top:2rem;
   border-radius: .5rem;
+  width: 40rem;
 }
 
 .turtles {
@@ -54,6 +55,11 @@ h4, h2 {
   margin: .5rem;
 }
 
+.pizzas h5:hover {
+  cursor: pointer;
+  color: red;
+} 
+
 .size {
   display: flex;
   flex-direction: row;
@@ -81,7 +87,6 @@ h4, h2 {
 
 .option-group :hover {
   cursor: pointer;
-  /* border: solid; */
   color: red;
 }
 
@@ -130,7 +135,11 @@ button:hover {
   width: 66%;
   margin-left: 18%;
   margin-right: 18%;
+}
 
+.sign-in {
+  width: 32rem;
+  text-align: center;
 }
 
 .order-page {
@@ -153,12 +162,17 @@ button:hover {
   background-color: antiquewhite;
   padding: 2rem;
   border-radius: 1rem;
+  width: 50rem;
 }
 
 .order {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  background-color: yellowgreen;
+  margin: .5rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .order-button {
@@ -168,4 +182,11 @@ button:hover {
 .order-button:hover {
   cursor: pointer;
   color: red;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

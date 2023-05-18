@@ -76,7 +76,11 @@ function Orders({ filters }) {
         <button onClick={() => navigate('/build')}>New Order</button>
         { successMessage && <h3 style={{color: 'green'}} >{successMessage}</h3> }
         { error && <h3 style={{color: 'red'}} >{error}</h3> }
-        { !orders.length ? <h2>No Current Orders</h2> : orderList }
+        { !orders.length ? <h2>No Current Orders</h2> : 
+          <div className="order-list"> 
+            { orderList }
+          </div> 
+        }
       </div>
   )
 }
@@ -111,9 +115,11 @@ function Order(order) {
       <span>{order.crust}</span>
       <span>{order.size}</span>
       <span>Table {order.table}</span>
-      <span>Oder No {order.id}</span>
+      {/* <span>Oder No {order.id}</span> */}
       {/* <button onClick={() => order.cancel(order)} >Cancel Order</button> */}
-      <span className="order-button">cancel order</span>
+      <span onClick={() => order.cancel(order)}  className="order-button">
+        cancel order
+      </span>
     </div>
   )
 }

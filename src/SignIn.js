@@ -24,7 +24,7 @@ export default function SignIn() {
   }
 
   return (
-    <main className="main">
+    <main className="main sign-in">
       <h1 className="title">
           Turtle Pizza
       </h1>
