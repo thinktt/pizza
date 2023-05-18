@@ -1,10 +1,30 @@
-import { useState, useEffect, createContext, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import api from './api.js'
 import { useNavigate } from 'react-router-dom'
 
-const FilterContext = createContext({})
 
-export default function Orders() {
+export default function OrdersPage() {
+  const [pizzaFilters, setPizzaFilters] = useState([])
+  const [crustFilters, setCrustFilters] = useState([])
+  const [sizeFilters, setSizeFilters] = useState([])
+  const [tableFilters, setTableFilters] = useState([])
+
+  const filters = {
+    pizzaFilters, setPizzaFilters, 
+    crustFilters, setCrustFilters,
+    sizeFilters, setSizeFilters,
+    tableFilters, setTableFilters
+  }
+
+ return (
+  <main className="main">
+    <Filters {...filters} />
+    <Orders filters={filters} />
+  </main>
+ )
+}
+
+function Orders({ filters }) {
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -42,23 +62,47 @@ export default function Orders() {
     getOrders()
   }, [])
 
-  const orderList = orders.map(order => 
+  const filteredOrders = getFilteredOrders(orders, filters)
+
+  const orderList = filteredOrders.map(order => 
     <Order key={order.id} cancel={cancelOrder} {...order} />
   )
   
   return (
-    <main className="main">
-      <Filters />
-      <h1 className="title">
-          Orders
-      </h1>
-      <button onClick={() => navigate('/build')}>Create Order</button>
-      { successMessage && <h3 style={{color: 'green'}} >{successMessage}</h3> }
-      { error && <h3 style={{color: 'red'}} >{error}</h3> }
-      { !orders.length ? <h2>No Current Orders</h2> : orderList }
-    </main>
+      <div>
+        <h1 className="title">
+            Orders
+        </h1>
+        <button onClick={() => navigate('/build')}>Create Order</button>
+        { successMessage && <h3 style={{color: 'green'}} >{successMessage}</h3> }
+        { error && <h3 style={{color: 'red'}} >{error}</h3> }
+        { !orders.length ? <h2>No Current Orders</h2> : orderList }
+      </div>
   )
 }
+
+function getFilteredOrders(orders, filters) {
+  const {pizzaFilters, crustFilters, sizeFilters, tableFilters} = filters
+  const filteredOrders = orders.filter(order => {
+    if (pizzaFilters.length && !pizzaFilters.includes(order.pizza)) {
+      return false
+    }
+    if (crustFilters.length && !crustFilters.includes(order.crust)) {
+      return false
+    }
+    if (sizeFilters.length && !sizeFilters.includes(order.size)) {
+      return false
+    }
+    if (tableFilters.length && !tableFilters.includes(order.table.toString())) {
+      return false
+    }
+    return true
+  })
+
+    
+  return filteredOrders
+}
+
 
 function Order(order) {
   return (
@@ -73,18 +117,19 @@ function Order(order) {
   )
 }
 
+function Filters(props) {
+  const {
+    pizzaFilters, setPizzaFilters,
+    crustFilters, setCrustFilters,
+    sizeFilters, setSizeFilters,
+    tableFilters, setTableFilters
+  } = props
 
-function Filters() {
+
   const pizzas = ['Pepperoni', 'Mushroom', 'Pineapple', 'Cheese']
   const crusts = ['Thin Crust', 'Deep Dish']
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
   const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
-
-  const [pizzaFilters, setPizzaFilters] = useState([])
-  const [crustFilters, setCrustFilters] = useState([])
-  const [sizeFilters, setSizeFilters] = useState([])
-  const [tableFilters, setTableFilters] = useState([])
-
 
   const updaterObj = {
     pizza: setPizzaFilters,
