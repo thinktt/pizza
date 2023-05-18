@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext, useContext } from 'react'
 import api from './api.js'
 import { useNavigate } from 'react-router-dom'
+
+const FilterContext = createContext({})
 
 export default function Orders() {
   const navigate = useNavigate()
@@ -73,7 +75,7 @@ function Order(order) {
 
 
 function Filters() {
-  const pizzas = ['Peperoni', 'Mushroom', 'Pinapple', 'Cheese']
+  const pizzas = ['Pepperoni', 'Mushroom', 'Pineapple', 'Cheese']
   const crusts = ['Thin Crust', 'Deep Dish']
   const sizes = ['Small', 'Medium', 'Large', 'Extra Large']
   const tables = ['1', '2', '3', '4', '5', '6', '7', '8']
