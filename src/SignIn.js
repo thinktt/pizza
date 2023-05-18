@@ -47,7 +47,7 @@ function SignInForm({ sendAuth}) {
   const [password, setPassword] = useState()
 
   return (
-    <div class="sign-in-form">
+    <div className="sign-in-form">
       <input 
         type="text" 
         placeholder="Username" 

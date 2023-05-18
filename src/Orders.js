@@ -17,7 +17,7 @@ export default function OrdersPage() {
   }
 
  return (
-  <main className="main">
+  <main className="order-page">
     <Filters {...filters} />
     <Orders filters={filters} />
   </main>
@@ -69,11 +69,11 @@ function Orders({ filters }) {
   )
   
   return (
-      <div>
+      <div className='orders'>
         <h1 className="title">
             Orders
         </h1>
-        <button onClick={() => navigate('/build')}>Create Order</button>
+        <button onClick={() => navigate('/build')}>New Order</button>
         { successMessage && <h3 style={{color: 'green'}} >{successMessage}</h3> }
         { error && <h3 style={{color: 'red'}} >{error}</h3> }
         { !orders.length ? <h2>No Current Orders</h2> : orderList }
@@ -107,11 +107,11 @@ function getFilteredOrders(orders, filters) {
 function Order(order) {
   return (
     <div className="order">
-      <h2>{order.pizza}</h2>
-      <h3>{order.crust}</h3>
-      <h3>{order.size}</h3>
-      <h3>Table {order.table}</h3>
-      <h3>Oder No {order.id}</h3>
+      <span>{order.pizza}</span>
+      <span>{order.crust}</span>
+      <span>{order.size}</span>
+      <span>Table {order.table}</span>
+      <span>Oder No {order.id}</span>
       <button onClick={() => order.cancel(order)} >Cancel Order</button>
     </div>
   )

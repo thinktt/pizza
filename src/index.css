@@ -88,6 +88,7 @@ body {
   font-family: Turtle;
   font-size: 1rem;
   background-color: green;
+  color: black;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -127,18 +128,29 @@ button:hover {
 
 }
 
-
-/* button {
-  width: 7rem;
-  height: 3rem;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: green;
-  border: none;
-  border-radius: 5rem;
+.order-page {
+    display: flex;
+    flex-direction: row;
+    /* min-height: 100vh; */
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-content: space-around;
+    background-color: green;
 }
 
-button:hover {
-  cursor: pointer;
-  background-color: lightgreen;
-} */
+.filters {
+  background-color: antiquewhite;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.orders {
+  background-color: antiquewhite;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+}
