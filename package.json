@@ -19,7 +19,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "rm": "rm -rf docs",
-    "mv": "mv build docs"
+    "mv": "mv build docs",
+    "dbuild": "docker build -t pizza .",
+    "buildall": "npm run build && npm run dbuild"
   },
   "eslintConfig": {
     "extends": [
