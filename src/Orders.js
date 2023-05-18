@@ -112,7 +112,8 @@ function Order(order) {
       <span>{order.size}</span>
       <span>Table {order.table}</span>
       <span>Oder No {order.id}</span>
-      <button onClick={() => order.cancel(order)} >Cancel Order</button>
+      {/* <button onClick={() => order.cancel(order)} >Cancel Order</button> */}
+      <span className="order-button">cancel order</span>
     </div>
   )
 }
@@ -187,15 +188,15 @@ function Filter( { options, selections, updateFilter }) {
 
 
   return (
-    <div className="pizzas option-group">
+    <div className="pizzas">
     { options.map(option => 
-      <h4 
+      <h5 
         key={option} 
         className={selections.includes(option) ? 'selected' : ''}
         onClick={() => toggle(option)}
       >
         {option}
-      </h4> ) 
+      </h5> ) 
     }
     </div>
   )

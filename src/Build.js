@@ -66,13 +66,14 @@ export default function Build() {
 
   return (
     <main className="main">
-      <h1 className="title">
+      {/* <h1 className="title">
           Turtle Pizza
       </h1>
-      <h4>appears at your table with ninja stealth</h4>
+      <h4>appears at your table with ninja stealth</h4> */}
       <img 
-        className="turtles" 
+        className="turtles small" 
         src="/tmnt.png" alt="A group of teenage turtles approving of pizza" />
+      <h1>Create Pizza</h1>
       <Option 
         options={pizzas}
         optionSelection={pizzaSelection}
@@ -107,13 +108,13 @@ function Option( { options, optionSelection, doSelection }) {
   return (
     <div className="pizzas option-group">
     { options.map(option => 
-      <h2 
+      <h5 
         key={option} 
         className={optionSelection === option ? 'selected' : ''}
         onClick={() => doSelection(option)}
       >
         {option}
-      </h2> ) 
+      </h5> ) 
     }
     </div>
   )

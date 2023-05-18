@@ -7,13 +7,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 2rem;
   background-color: antiquewhite;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
   margin-bottom: 5%;
+  padding-top:2rem;
+  border-radius: .5rem;
 }
 
 .turtles {
@@ -21,6 +22,10 @@
   height: auto;
   margin-bottom: 1rem;
   border-radius: 6rem;
+}
+
+.turtles.small {
+  width: 8rem;
 }
 
 .form {
@@ -153,4 +158,14 @@ button:hover {
 .order {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.order-button {
+  font-size: .90rem;
+}
+
+.order-button:hover {
+  cursor: pointer;
+  color: red;
 }
